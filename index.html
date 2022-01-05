@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Heater</title>
+<script type="text/javascript">
+    function switchHeater(){
+    // alert("hello");
+    var switchPoint = document.getElementById('switchPoint');
+    var tube1 = document.getElementById('tube1');
+    var tube2 = document.getElementById('tube2');
+    var tube3 = document.getElementById('tube3');
+
+    if(switchPoint.className == 'switchPoint offAnimation'){
+        switchPoint.className = 'switchPoint openAnimation';
+        tube1.className = 'tubeHeater backgroundOpen';
+        tube2.className = 'tubeHeater backgroundOpen';
+        tube3.className = 'tubeHeater backgroundOpen';
+        // document.documentElement.style.setProperty('--shadow', '0 -2vh 4px -4px rgba(255, 94, 0, 0.425),0 2vh 4px -4px rgba(255, 94, 0, 0.425)');
+        // document.documentElement.style.setProperty('--tube', 'rgba(252, 103, 17, 0.89)');
+    } else{
+        switchPoint.className = 'switchPoint offAnimation';
+        tube1.className = 'tubeHeater backgroundOff';
+        tube2.className = 'tubeHeater backgroundOff';
+        tube3.className = 'tubeHeater backgroundOff';
+        // document.documentElement.style.setProperty('--shadow', '0 -2vh 4px -4px rgba(0, 255, 242, 0.226),0 2vh 4px -4px rgba(0, 255, 242, 0.226)');
+        // document.documentElement.style.setProperty('--tube', 'rgba(238, 238, 238, 0.842)');
+    }
+}
+</script>
+<style>
+    :root{
+        --shadow: 0 -2vh 4px -4px rgba(0, 255, 242, 0.226),0 2vh 4px -4px rgba(0, 255, 242, 0.226);
+        --tube:rgba(238, 238, 238, 0.842);
+    }
+#baseHeater {
+    border-radius: 25px;
+    background: #FFF;
+    /* padding: 20%; */
+    width: 50vw;
+    height: 70vh;
+    margin-top: 15vh;
+    margin-left: 25vw;
+    display: flex;
+}
+#boxHeater {
+    border-radius: 25px;
+    background: #D8D8D8;
+    width: 40vw;
+    height: 50vh;
+    margin-top: 5vh;
+    margin-left: 5vw;
+    box-shadow: 3vw 3vh 7px 1px #666 inset;/*水平阴影、垂直阴影、羽化值、阴影大小、阴影颜色*/
+    display:flex;
+}
+.tubeHeater{
+    background: var(--tube);/*rgba(238, 238, 238, 0.842)*/
+    width: 40vw;
+    height: 5vh;
+    margin-top: 9vh; 
+    box-shadow: var(--shadow);
+    min-width: 295px;
+}
+.tubeHeater.backgroundOpen{
+    animation: backgroundOpen 1s linear 0s 1;
+    animation-fill-mode:forwards;
+}
+@keyframes backgroundOpen {
+  0% { background: rgba(238, 238, 238, 0.842); box-shadow:0 -2vh 4px -4px rgba(0, 255, 242, 0.226),0 2vh 4px -4px rgba(0, 255, 242, 0.226); }
+  100% { background: rgba(252, 103, 17, 0.89); box-shadow: 0 -2vh 4px -4px rgba(255, 94, 0, 0.425),0 2vh 4px -4px rgba(255, 94, 0, 0.425);}
+}
+.tubeHeater.backgroundOff{
+    animation: backgroundOff 1s linear 0s 1;
+    animation-fill-mode:forwards;
+}
+@keyframes backgroundOff {
+  0% { background: rgba(252, 103, 17, 0.89); box-shadow: 0 -2vh 4px -4px rgba(255, 94, 0, 0.425),0 2vh 4px -4px rgba(255, 94, 0, 0.425);}
+  100% { background: rgba(238, 238, 238, 0.842); box-shadow:0 -2vh 4px -4px rgba(0, 255, 242, 0.226),0 2vh 4px -4px rgba(0, 255, 242, 0.226)}
+}
+#switchHeater{
+    width: 10vh;
+    height: 10vh;
+    border-radius: 50%;
+    background-color: rgb(221, 221, 221);
+    box-shadow: 1vw 1vh 3px 1px rgb(167, 167, 167);/*水平阴影、垂直阴影、羽化值、阴影大小、阴影颜色*/
+    position: relative
+}
+.switchPoint{
+    background: #000;
+    width: 50%;
+    height: 2px;
+    position: absolute;
+    top: 60%;
+    left: 25%;
+    margin: -15% 0 0 -25%;
+}
+.switchPoint.openAnimation{
+    /* animation: PointMove 6s linear 1; 动画名称、持续时间、运动方式、重复形式（也可以写成具体次数，例如：5） */
+    transform-origin: right; /*控制以哪个点为中心点*/
+    transform: rotate(180deg);
+    transition: transform 1s linear;
+}
+.switchPoint.offAnimation{
+    transform-origin: right; /*控制以哪个点为中心点*/
+    transform: rotate(0deg);
+    transition: transform 1s linear;
+}
+
+</style>
+</head>
+<body style="background-color:#37ddf3;">
+    <div>
+        <div id=baseHeater style="min-width: 350px;">
+            <div>
+                <div id=boxHeater style="min-width: 295px;">
+                    <div>
+                        <div id=tube1 class="tubeHeater"></div>
+                        <div id=tube2 class="tubeHeater"></div>
+                        <div id=tube3 class="tubeHeater"></div>
+                    </div>
+                </div>
+                <div>
+                    <div id=switchHeater onclick="switchHeater()" style="margin-left: 45%; margin-top: 2vh; text-align:center;">
+                        <!-- <p style="color: black; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 2.5vh; padding-top: 35%;">ON</p> -->
+                        <div id=switchPoint class="switchPoint offAnimation"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
